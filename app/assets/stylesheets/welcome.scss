@@ -1,0 +1,451 @@
+/************************************************
+	0. HTML, Body, General Styles
+************************************************/
+
+/*MTA Color Palette
+! SCSS or SASS needed for variables.
+! Silver is for S train (S for Silver).
+! Platinum is for L train.
+! Lime is for G train.
+! Green is for 4,5,6 trains.*/
+
+$mta-blue:      #2850AD;
+$mta-orange:    #FF6319;
+$mta-lime:      #6CBE45;
+$mta-brown:     #996633;
+$mta-platinum:  #A7A9AC;
+$mta-yellow:    #FCCC0A;
+$mta-silver:    #808183;
+$mta-red:       #EE352E;
+$mta-green:     #00933C;
+$mta-purple:    #B933AD;
+
+$light-blue:    #6B89CD;
+$dark-blue:     #0B2B74;
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+.centered {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+input:focus, textarea:focus {
+  border-color: $mta-blue !important;
+}
+
+/************************************************
+	1. Sidebar
+************************************************/
+
+#sidebar {
+  width: 200px;
+  height: 100%;
+  position: fixed;
+  z-index: 2000;
+  background-color: $mta-blue;
+  text-align: right;
+  margin-left: -150px;
+
+  #togglebtn {
+    background: none;
+    border: none;
+    border-left: 1px solid white;
+    border-radius: 0px;
+    outline: none;
+    width: 50px;
+    height: 100%;
+    float: right;
+    color: white;
+
+    #menu-label {
+      position: absolute;
+      top: 30px;
+      transform: rotate(90deg) translate(30px, 35px);
+      transform-origin: top, right;
+      font-weight: bold;
+      font-size: 125%
+    }
+  }
+
+  /*Menu*/
+  .btn-group-vertical {
+    float: left;
+
+    button, a {
+      background: none;
+      border: none;
+      outline: none;
+      text-align: left;
+      margin: 10px;
+      border-radius: 10px;
+      color: white;
+    }
+
+    .btn.btn-default:hover{
+      background: #6B89CD;
+      font-weight: bold;
+    }
+  }
+}
+
+.sidebar-hidden {
+  animation: slideOut 0.5s linear;
+  animation-fill-mode: forwards;
+
+  #menu-label {
+    color: white;
+  }
+}
+
+.sidebar-appear {
+  animation: slideIn 0.5s linear;
+  animation-fill-mode: forwards;
+
+  #menu-label{
+    color: $dark-blue;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    margin-left: -150px;
+  }
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: -150px;
+  }
+}
+
+/************************************************
+	2. Carousel
+************************************************/
+
+#carousel-container {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+@media (max-width: 767px) {
+  #carousel-container {
+    margin-left: 50px;
+  }
+}
+
+/************************************************
+	2a. Form (Slide 0) Content
+************************************************/
+
+.form-group.searchBar {
+  margin-bottom: 15px;
+  max-width: 400px;
+}
+
+.searchBar .glyphicon-map-marker {
+  color: $mta-red;
+}
+
+#message-container {
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#recent {
+  background-color: $mta-blue;
+  border-radius: 10px;
+  padding: 5px;
+  max-width: 400px;
+  margin: 15px auto;
+
+  p, a {
+    color: white;
+  }
+
+  .btn {
+    margin: 2px auto;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    white-space: normal;
+  }
+
+  .btn:hover {
+    background-color: $light-blue;
+    font-weight: bold;
+  }
+  .btn:active {
+    color: $dark-blue;
+  }
+}
+
+/************************************************
+  2b. Info (Slide 1) Content
+************************************************/
+
+#map-canvas {
+  position: fixed;
+  min-width: 190px;
+  min-height: 190px;
+  border-style: solid;
+  border-color: $mta-blue;
+  margin-bottom: 10px;
+}
+
+/*Media queries are based on bootstrap's sm, md, and lg queries.*/
+@media (min-width: 768px) {
+  #map-canvas {
+    height: 450px;
+  }
+  .tab-pane {
+    height: 380px;
+  }
+}
+
+@media (min-width: 992px) {
+  #map-canvas {
+    height: 550px;
+  }
+  .tab-pane {
+    height: 480px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #map-canvas {
+    height: 720px;
+  }
+  .tab-pane {
+    height: 675px;
+  }
+}
+
+#tabs {
+  li a {
+    color: $light-blue;
+    font-weight: bold;
+    /*border-radius : tl tr br bl;*/
+    border-radius: 10px 10px 0px 0px;
+  }
+
+  li:not(.active) a {
+    background: white;
+    border: none;
+  }
+  
+  li:not(#directionsTab):not(#routeChange).active a,
+  li:not(#directionsTab):not(#routeChange) a:active, 
+  li:not(#directionsTab):not(#routeChange) a:hover, 
+  li:not(#directionsTab):not(#routeChange) a:focus {
+    color: white;
+  }
+
+  li.active, li:not(active):hover {
+    a.blue-tab {
+      background: $mta-blue;
+    }
+
+    a.orange-tab {
+      background-color: $mta-orange;
+    }
+
+    a.lime-tab {
+      background-color: $mta-lime;
+    }
+
+    a.brown-tab {
+      background-color: $mta-brown;
+    }
+
+    a.platinum-tab {
+      background-color: $mta-platinum;
+    }
+
+    a.yellow-tab {
+      background-color: $mta-yellow;
+    }
+
+    a.silver-tab {
+      background-color: $mta-silver;
+    }
+
+    a.red-tab {
+      background-color: $mta-red;
+    }
+
+    a.green-tab {
+      background-color: $mta-green;
+    }
+
+    a.purple-tab {
+      background-color: $mta-purple;
+    }
+  }
+}
+
+#tab0 {
+  padding: 10px;
+
+  p {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border-style: none;
+    /*padding: top right bottom left;*/
+    padding: 5px 10px 5px 10px;
+  }
+
+  /*Instructions found in #tab0.*/
+ .instr {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border-style: none;
+    /*padding: top right bottom left;*/
+    padding: 5px 10px 5px 10px;
+    border-bottom: 1px solid $mta-platinum;
+
+    /*Subway instructions are anchors to other tabs.*/
+    a {
+     color: $light-blue;
+    }
+    
+    /*Icons and logos for different transit vehicles.*/
+    img {
+      width: 16px;
+      height: 16px;
+      margin-left: 2px;
+      margin-right: 2px;
+    }
+  }
+
+  /*Additional information found under instructions.*/
+  .subtext {
+    margin-top: -5px;
+    font-size: small;
+  }
+}
+
+.tab-content {
+  overflow-y: auto;
+
+  :not(#tab0).tab-pane{
+    padding: 15px;
+    /*border-radius : tl tr br bl;*/
+    border-radius: 0px 0px 15px 15px;
+
+    h1 {
+      width: 50px;
+      height: 50px;
+      padding-top: 3px;
+      border: 3px solid white;
+      border-radius: 50%;
+      text-align: center;
+      background-color:transparent;
+    }
+
+    p:nth-child(even) {
+      font-weight: bold;
+    }
+
+    p:nth-child(odd) {
+      margin-left: 15px;
+    }
+  }
+}
+
+.blue-tab {
+  color: white;
+  background-color: $mta-blue;
+}
+
+.orange-tab {
+  color: white;
+  background-color: $mta-orange;
+}
+
+.lime-tab {
+  color: white;
+  background-color: $mta-lime;
+}
+
+.brown-tab {
+  color: white;
+  background-color: $mta-brown;
+}
+
+.platinum-tab {
+  color: white;
+  background-color: $mta-platinum;
+}
+
+.yellow-tab {
+  color: white;
+  background-color: $mta-yellow;
+}
+
+.silver-tab {
+  color: white;
+  background-color: $mta-silver;
+}
+
+.red-tab {
+  color: white;
+  background-color: $mta-red;
+}
+
+.green-tab {
+  color: white;
+  background-color: $mta-green;
+}
+
+.purple-tab {
+  color: white;
+  background-color: $mta-purple;
+}
+
+/************************************************
+	2c. Survey (Slide 2) Content
+************************************************/
+
+.voting.jumbotron {
+  background: $mta-blue;
+  border-radius: 30px;
+  margin-top: 30px;
+  color: white;
+  text-align: center;
+}
+
+#yes, #no {
+  display: inline-block;
+  max-width: 200px;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/************************************************
+	2c. Feedback (Slide 3) Content
+************************************************/
+
+#feedback {
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  button {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
